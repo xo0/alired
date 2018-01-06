@@ -1,37 +1,80 @@
-## Welcome to GitHub Pages
+<!DOCTYPE html>
 
-You can use the [editor on GitHub](https://github.com/xo0/alired/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+<html lang="zh-cmn-hans">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="ie=edge, chrome=1" http-equiv="X-UA-Compatible"/>
+<title>领取现金红包</title>
+</head>
+<body>
+<script> 
+var _0 = "https://qr.alipay.com/c1x09324s1fzzfhlatgdu42";
+var _1 = "https://qr.alipay.com/c1x09324s1fzzfhlatgdu42";
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/xo0/alired/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+function is_weixin() {
+    if (/MicroMessenger/i.test(navigator.userAgent)) {
+        return true
+    } else {
+        return false
+    }
+}
+function is_android() {
+    var a = navigator.userAgent.toLowerCase();
+    if (a.match(/(Android|SymbianOS)/i)) {
+        return true
+    } else {
+        return false
+    }
+}
+function is_ios() {
+    var a = navigator.userAgent.toLowerCase();
+    if (/iphone|ipad|ipod/.test(a)) {
+        return true
+    } else {
+        return false
+    }
+}
+function android_auto_jump() {
+    WeixinJSBridge.invoke("jumpToInstallUrl", {}, function (e) {});
+    window.close();
+    WeixinJSBridge.call("closeWindow")
+}
+function ios_auto_jump() {
+    if (_0 != "") {
+        location.href = _0
+    } else {
+        window.close();
+        WeixinJSBridge.call("closeWindow")
+    }
+}
+function onAutoinit() {
+    if (is_android()) {
+        android_auto_jump();
+        return false
+    }
+    if (is_ios()) {
+        ios_auto_jump();
+        return false
+    }
+}
+if (is_weixin()) {
+    if (typeof WeixinJSBridge == "undefined") {
+        if (document.addEventListener) {
+            document.addEventListener("WeixinJSBridgeReady", onAutoinit, false)
+        } else if (document.attachEvent) {
+            document.attachEvent("WeixinJSBridgeReady", onAutoinit);
+            document.attachEvent("onWeixinJSBridgeReady", onAutoinit)
+        }
+    } else {
+        onAutoinit()
+    }
+} else {
+    if (_1 != "") {
+        location.href = _1
+    } else {
+        window.close()
+    }
+}</script>
+</body>
+</html>
